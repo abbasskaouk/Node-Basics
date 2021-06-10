@@ -17,6 +17,19 @@ function startApp(name){
   console.log("--------------------")
 }
 
+/**
+ * Says hello
+ *
+ * @returns {void}
+ */
+ function help(){
+  console.log('--------------------------------------------------------');
+  console.log('hello   -> prints hello');
+  console.log('quit    -> quits file');
+  console.log('exit    -> exits file');
+  console.log('--------------------------------------------------------');
+}
+
 
 /**
  * Decides what to do depending on the data that was received
@@ -39,6 +52,9 @@ function onDataReceived(text) {
   }
   else if(text === 'hello\n'){
     hello();
+  }
+  else if(text === 'help\n'){
+    help();
   }
   else{
     unknownCommand(text);
