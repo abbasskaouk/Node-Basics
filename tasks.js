@@ -17,8 +17,8 @@ function startApp(name){
   console.log("--------------------")
 }
 
-var tasks = [{ id:1 , check:"false" , checkbox:"[ ]" , task: "buy batata"},
-             { id:2 , check:"false" , checkbox:"[ ]" , task: "do the exercises"}];
+var tasks = [{ check:"false" , checkbox:"[ ]" , task: "buy batata"},
+             { check:"false" , checkbox:"[ ]" , task: "do the exercises"}];
 
 
 /**
@@ -28,9 +28,23 @@ var tasks = [{ id:1 , check:"false" , checkbox:"[ ]" , task: "buy batata"},
  */
  function list(){
   for ( var i = 0 ; i < tasks.length ; i++ ){
-    console.log(tasks[i].id + ' - ' + tasks[i].checkbox + ' ' + tasks[i].task);
+    console.log((i+1) + ' - ' + tasks[i].checkbox + ' ' + tasks[i].task);
   }
 }
+
+/**
+ * add tasks
+ *
+ * @add {task}
+ */
+function add(toAdd){
+  var str = toAdd;
+  var x = {check:"false" , checkbox:"[ ]" , task:str};
+  tasks.push(x);
+}
+
+
+
 /**
  * shows help
  * shows all commands
@@ -41,6 +55,7 @@ var tasks = [{ id:1 , check:"false" , checkbox:"[ ]" , task: "buy batata"},
   console.log('--------------------------------------------------------');
   console.log('hello          -> prints hello');
   console.log('hello + name   -> prints hello name');
+  console.log('add + task     -> adds new task to existing list');
   console.log('list           -> shows all tasks');
   console.log('help           -> shows all commands');
   console.log('quit           -> quits file');
@@ -67,10 +82,17 @@ var tasks = [{ id:1 , check:"false" , checkbox:"[ ]" , task: "buy batata"},
 function onDataReceived(text) {
   //console.log(text);
   let name = text.substr(5);
+  let toAdd = text.substr(4);
   if (text.split(" ",1) == 'hello'){
     greeting(name);
   }
-  if (text === 'quit\n' || text === 'exit\n') {
+  else if (text.split(" ",1) == 'add'){
+    add(toAdd);
+  }
+  else if (text === 'add\n'){
+    console.log('error');
+  }
+  else if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
   else if(text === 'hello\n'){
