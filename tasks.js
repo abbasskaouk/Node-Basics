@@ -66,6 +66,16 @@ function removeTask(taskNum){
   tasks.splice(num,1);
 }
 
+/**
+ * edits the specific task
+ *
+ * @edits {specific task}
+ */
+function edit(editNum,toEdit){
+  var num = editNum - 1;
+  tasks[num].task = toEdit;
+}
+
 
 
 /**
@@ -79,6 +89,9 @@ function removeTask(taskNum){
   console.log('hello          -> prints hello');
   console.log('hello + name   -> prints hello name');
   console.log('add + task     -> adds new task to existing list');
+  console.log('remove         -> removes the last task from the list');
+  console.log('remove + number-> removes the defined task number from the list');
+  console.log('edit + number  -> edits the task number at the specified number from the list');
   console.log('list           -> shows all tasks');
   console.log('help           -> shows all commands');
   console.log('quit           -> quits file');
@@ -107,10 +120,16 @@ function onDataReceived(text) {
   let name = text.substr(5);
   let toAdd = text.substr(4);
   let taskNum = text.substr(6);
+  let toEdit = text.substr(6);
+  //editing.trim();
+  let editNum = text.substring(5,6);
+  console.log(toEdit);
+  console.log(editNum);
+  
   if (text.split(" ",1) == 'hello'){
     greeting(name);
   }
-  else if (text.split(" ",1) == 'add'){
+  else if (text.split(" ", 1) == 'add'){
     add(toAdd);
   }
   else if (text === 'add\n'){
@@ -121,6 +140,12 @@ function onDataReceived(text) {
   }
   else if (text.split(" ",1) == 'remove'){
     removeTask(taskNum);
+  }
+  else if (text === 'edit\n'){
+    console.log('error');
+  }
+  else if (text.split(" ",1) == 'edit'){
+    edit(editNum,toEdit);
   }
   else if (text === 'quit\n' || text === 'exit\n') {
     quit();
