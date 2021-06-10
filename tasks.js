@@ -60,6 +60,9 @@ function remove(){
  */
 function removeTask(taskNum){
   var num = taskNum - 1;
+  if( taskNum < 0 || taskNum > tasks.length){
+    console.log("Number doesn't exist");
+  }
   tasks.splice(num,1);
 }
 
