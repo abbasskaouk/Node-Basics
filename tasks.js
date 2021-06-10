@@ -18,7 +18,8 @@ function startApp(name){
 }
 
 var tasks = [{ check:"false" , checkbox:"[ ]" , task: "buy batata"},
-             { check:"false" , checkbox:"[ ]" , task: "do the exercises"}];
+             { check:"false" , checkbox:"[ ]" , task: "do the exercises"},
+             { check:"false" , checkbox:"[ ]" , task: "finish the code"}];
 
 
 /**
@@ -41,6 +42,21 @@ function add(toAdd){
   var str = toAdd;
   var x = {check:"false" , checkbox:"[ ]" , task:str};
   tasks.push(x);
+}
+
+
+/**
+ * remove lasy task
+ *
+ * @remove {last task}
+ */
+function remove(){
+  tasks.pop();
+}
+
+function removeTask(taskNum){
+  var num = taskNum - 1;
+  tasks.splice(num,1);
 }
 
 
@@ -83,6 +99,7 @@ function onDataReceived(text) {
   //console.log(text);
   let name = text.substr(5);
   let toAdd = text.substr(4);
+  let taskNum = text.substr(6);
   if (text.split(" ",1) == 'hello'){
     greeting(name);
   }
@@ -91,6 +108,12 @@ function onDataReceived(text) {
   }
   else if (text === 'add\n'){
     console.log('error');
+  }
+  else if (text === 'remove\n'){
+    remove();
+  }
+  else if (text.split(" ",1) == 'remove'){
+    removeTask(taskNum);
   }
   else if (text === 'quit\n' || text === 'exit\n') {
     quit();
