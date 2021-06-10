@@ -78,7 +78,27 @@ function edit(editNum,toEdit){
   tasks[num].task = toEdit;
 }
 
+/**
+ * checks the finished task
+ *
+ * @checks {checks task}
+ */
+function check(checkNum){
+  var num = checkNum - 1;
+  tasks[num].check = true;
+  tasks[num].checkbox = "[x]";
+}
 
+/**
+ * unchecks the unfinished task
+ *
+ * @unchecks {unchecks task}
+ */
+function uncheck(uncheckNum){
+  var num = uncheckNum - 1;
+  tasks[num].check = false;
+  tasks[num].checkbox = "[ ]";
+}
 
 /**
  * shows help
@@ -94,6 +114,8 @@ function edit(editNum,toEdit){
   console.log('remove         -> removes the last task from the list');
   console.log('remove + number-> removes the defined task number from the list');
   console.log('edit + number  -> edits the task number at the specified number from the list');
+  console.log('check + number -> checks the task done from the list');
+  console.log('uncheck + number-> unchecks the task not finished from the list');
   console.log('list           -> shows all tasks');
   console.log('help           -> shows all commands');
   console.log('quit           -> quits file');
@@ -123,14 +145,28 @@ function onDataReceived(text) {
   let taskNum = text.substr(6);
   let toEdit = text.substr(6);
   let editNum = text.substring(5,6);
+  let checkNum = text.substr(5);
+  let uncheckNum = text.substr(7);
   //console.log(toEdit);
-  //console.log(editNum);
+  //console.log(uncheckNum);
   
   if (text.split(" ",1) == 'hello'){
     greeting(name);
   }
   else if (text.split(" ", 1) == 'add'){
     add(toAdd);
+  }
+  else if (text === 'check\n'){
+    console.log('error');
+  }
+  else if (text.split(" ",1) == 'check'){
+    check(checkNum);
+  }
+  else if (text === 'uncheck\n'){
+    console.log('error');
+  }
+  else if (text.split(" ",1) == 'uncheck'){
+    uncheck(uncheckNum);
   }
   else if (text === 'add\n'){
     console.log('error');
