@@ -17,9 +17,11 @@ function startApp(name){
   console.log("--------------------")
 }
 
-var tasks = [{ check:"false" , checkbox:"[ ]" , task: "buy batata"},
-             { check:"false" , checkbox:"[ ]" , task: "do the exercises"},
-             { check:"false" , checkbox:"[ ]" , task: "finish the code"}];
+var tasks = [{ check:false , checkbox:"[ ]" , task: "buy batata"},
+             { check:true , checkbox:"[x]" , task: "feed the cat"},
+             { check:false , checkbox:"[ ]" , task: "do the exercises"},
+             { check:true , checkbox:"[x]" , task: "make the bed"},
+             { check:false , checkbox:"[ ]" , task: "finish the code"}];
 
 
 /**
@@ -116,15 +118,13 @@ function edit(editNum,toEdit){
  * @returns {void}
  */
 function onDataReceived(text) {
-  //console.log(text);
   let name = text.substr(5);
   let toAdd = text.substr(4);
   let taskNum = text.substr(6);
   let toEdit = text.substr(6);
-  //editing.trim();
   let editNum = text.substring(5,6);
-  console.log(toEdit);
-  console.log(editNum);
+  //console.log(toEdit);
+  //console.log(editNum);
   
   if (text.split(" ",1) == 'hello'){
     greeting(name);
