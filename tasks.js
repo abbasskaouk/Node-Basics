@@ -18,7 +18,8 @@ function startApp(name){
 }
 
 /**
- * Says hello
+ * shows help
+ * shows all commands
  *
  * @returns {void}
  */
