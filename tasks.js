@@ -46,14 +46,18 @@ function add(toAdd){
 
 
 /**
- * remove lasy task
+ * remove last task
  *
  * @remove {last task}
  */
 function remove(){
   tasks.pop();
 }
-
+/**
+ * remove the specific task
+ *
+ * @remove {specific task}
+ */
 function removeTask(taskNum){
   var num = taskNum - 1;
   tasks.splice(num,1);
