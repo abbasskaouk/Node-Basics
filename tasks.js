@@ -17,6 +17,20 @@ function startApp(name){
   console.log("--------------------")
 }
 
+var tasks = [{ id:1 , check:"false" , checkbox:"[ ]" , task: "buy batata"},
+             { id:2 , check:"false" , checkbox:"[ ]" , task: "do the exercises"}];
+
+
+/**
+ * shows tasks
+ *
+ * @returns {tasks}
+ */
+ function list(){
+  for ( var i = 0 ; i < tasks.length ; i++ ){
+    console.log(tasks[i].id + ' - ' + tasks[i].checkbox + ' ' + tasks[i].task);
+  }
+}
 /**
  * shows help
  * shows all commands
@@ -27,6 +41,8 @@ function startApp(name){
   console.log('--------------------------------------------------------');
   console.log('hello          -> prints hello');
   console.log('hello + name   -> prints hello name');
+  console.log('list           -> shows all tasks');
+  console.log('help           -> shows all commands');
   console.log('quit           -> quits file');
   console.log('exit           -> exits file');
   console.log('--------------------------------------------------------');
@@ -63,6 +79,9 @@ function onDataReceived(text) {
   else if(text === 'help\n'){
     help();
   }
+  else if(text === 'list\n'){
+    list();
+  }
   else{
     unknownCommand(text);
   }
@@ -82,15 +101,19 @@ function unknownCommand(c){
 
 
 /**
- * Says hello
+ * Says hello + name
  *
- * @returns {void}
+ * @returns {hello + name}
  */
 function greeting(name){
   name = name.trim();
   console.log('Hello '+name+'!');
 }
-
+/**
+ * Says hello
+ *
+ * @returns {void}
+ */
 function hello(){
   console.log('hello!')
 }
