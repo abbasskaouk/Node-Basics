@@ -25,9 +25,10 @@ function startApp(name){
  */
  function help(){
   console.log('--------------------------------------------------------');
-  console.log('hello   -> prints hello');
-  console.log('quit    -> quits file');
-  console.log('exit    -> exits file');
+  console.log('hello          -> prints hello');
+  console.log('hello + name   -> prints hello name');
+  console.log('quit           -> quits file');
+  console.log('exit           -> exits file');
   console.log('--------------------------------------------------------');
 }
 
@@ -48,6 +49,11 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+  //console.log(text);
+  let name = text.substr(5);
+  if (text.split(" ",1) == 'hello'){
+    greeting(name);
+  }
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
@@ -80,6 +86,11 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
+function greeting(name){
+  name = name.trim();
+  console.log('Hello '+name+'!');
+}
+
 function hello(){
   console.log('hello!')
 }
