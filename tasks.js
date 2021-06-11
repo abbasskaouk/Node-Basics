@@ -79,6 +79,17 @@ function edit(editNum,toEdit){
 }
 
 /**
+ * edits the last task
+ *
+ * @edits {last task}
+ */
+function editLast(toEdit){
+  var num = tasks.length-1;
+  tasks[num].task = toEdit;
+}
+
+
+/**
  * checks the finished task
  *
  * @checks {checks task}
@@ -108,18 +119,19 @@ function uncheck(uncheckNum){
  */
  function help(){
   console.log('--------------------------------------------------------');
-  console.log('hello          -> prints hello');
-  console.log('hello + name   -> prints hello name');
-  console.log('add + task     -> adds new task to existing list');
-  console.log('remove         -> removes the last task from the list');
-  console.log('remove + number-> removes the defined task number from the list');
-  console.log('edit + number  -> edits the task number at the specified number from the list');
-  console.log('check + number -> checks the task done from the list');
-  console.log('uncheck + number-> unchecks the task not finished from the list');
-  console.log('list           -> shows all tasks');
-  console.log('help           -> shows all commands');
-  console.log('quit           -> quits file');
-  console.log('exit           -> exits file');
+  console.log('hello              -------> prints hello');
+  console.log('hello + name       -------> prints hello name');
+  console.log('add + task         -------> adds new task to existing list');
+  console.log('remove             -------> removes the last task from the list');
+  console.log('remove + number    -------> removes the defined task number from the list');
+  console.log('edit + number      -------> edits the task number at the specified number from the list');
+  console.log('edit + task        -------> edits the last task from the list');
+  console.log('check + number     -------> checks the task done from the list');
+  console.log('uncheck + number   -------> unchecks the task not finished from the list');
+  console.log('list               -------> shows all tasks');
+  console.log('help               -------> shows all commands');
+  console.log('quit               -------> quits file');
+  console.log('exit               -------> exits file');
   console.log('--------------------------------------------------------');
 }
 
@@ -143,13 +155,16 @@ function onDataReceived(text) {
   let name = text.substr(5);
   let toAdd = text.substr(4);
   let taskNum = text.substr(6);
-  let toEdit = text.substr(6);
+  let toEdit = text.substr(7);
+  let toEditlast = text.substr(5);
   let editNum = text.substring(5,6);
   let checkNum = text.substr(5);
   let uncheckNum = text.substr(7);
   //console.log(toEdit);
   //console.log(uncheckNum);
-  
+  //var x = JSON.stringify(tasks);
+  //console.log(x);
+
   if (text.split(" ",1) == 'hello'){
     greeting(name);
   }
@@ -180,8 +195,11 @@ function onDataReceived(text) {
   else if (text === 'edit\n'){
     console.log('error');
   }
-  else if (text.split(" ",1) == 'edit'){
+  else if (text.match(/edit\s\d+/)){
     edit(editNum,toEdit);
+  }
+  else if (text.match(/edit\s\D+\w*/)){
+    editLast(toEditlast);
   }
   else if (text === 'quit\n' || text === 'exit\n') {
     quit();
@@ -194,6 +212,9 @@ function onDataReceived(text) {
   }
   else if(text === 'list\n'){
     list();
+  }
+  else if(text === 'save\n'){
+    save();
   }
   else{
     unknownCommand(text);
@@ -231,6 +252,16 @@ function hello(){
   console.log('hello!')
 }
 
+function save(){
+  var x = JSON.stringify(tasks);
+  fs = require('fs');
+  fs.writeFileSync("database.json", x);
+}
+
+function load(){
+  fs = require('fs');
+  fs.readFile(__dirname + "/test.txt");
+}
 
 /**
  * Exits the application
