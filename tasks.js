@@ -1,4 +1,16 @@
 
+
+var fileName = "database.json";
+
+var doesExist = process.argv[2];
+if (doesExist == null){
+  console.log("no new file");
+}
+else if(doesExist != null){
+  console.log(doesExist);
+}
+
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -261,7 +273,7 @@ var x;
 function load(){
   const fs = require('fs');
 
-  let rawdata = fs.readFileSync('database.json');
+  let rawdata = fs.readFileSync(fileName);
   tasks = JSON.parse(rawdata);
 }
 
@@ -273,7 +285,7 @@ function load(){
 function quit(){
   var x = JSON.stringify(tasks);
   fs = require('fs');
-  fs.writeFileSync("database.json", x);
+  fs.writeFileSync(fileName, x);
   console.log('Quitting now, goodbye!')
   process.exit();
 }

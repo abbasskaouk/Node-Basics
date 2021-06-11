@@ -1,1 +1,1 @@
-[{"check":"false","checkbox":"[ ]","task":"abbass\n"},{"check":"false","checkbox":"[ ]","task":"play football\n"},{"check":"false","checkbox":"[ ]","task":"finish code\n"}]
+[{"check":true,"checkbox":"[x]","task":"play football\n"},{"check":"false","checkbox":"[ ]","task":"abbass\n"},{"check":"false","checkbox":"[ ]","task":"go to sleep\n"},{"check":"false","checkbox":"[ ]","task":"go home\n"}]
