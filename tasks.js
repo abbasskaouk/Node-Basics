@@ -1,16 +1,36 @@
-
-
 var fileName;
-
+  
 var doesExist = process.argv[2];
-if (doesExist == null){
-  var fileName = "database.json";
-  console.log("no new file");
-}
-else if(doesExist != null){
-  console.log(doesExist);
-}
 
+  if (doesExist == null){
+    fileName = "database.json";
+    console.log("no new file");
+  }
+  else if(doesExist != null){
+    fileName = doesExist;
+    console.log(doesExist);
+  }
+
+
+
+function doesFileExist(){
+  const fs = require('fs')
+
+  const path = fileName;
+
+  try {
+    if (fs.existsSync(path)) {
+      console.log("existsssssssss");
+    }
+    else {
+      var x = JSON.stringify(tasks);
+      fs = require('fs');
+      fs.writeFileSync(fileName, x);
+    }
+  } catch(err) {
+    console.error(err)
+  }
+}
 
 /**
  * Starts the application
@@ -26,6 +46,7 @@ function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   load();
+  doesFileExist();
   process.stdin.on('data', onDataReceived);
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
@@ -164,7 +185,7 @@ function uncheck(uncheckNum){
 function onDataReceived(text) {
   let name = text.substr(5);
   let toAdd = text.substr(4);
-  let taskNum = text.substr(6);
+  let taskNum = text.substr(6); //remove 4
   let toEdit = text.substr(7);
   let toEditlast = text.substr(5);
   let editNum = text.substring(5,6);
@@ -269,7 +290,7 @@ function hello(){
   console.log('hello!')
 }
 
-var x;
+
 
 function load(){
   const fs = require('fs');
