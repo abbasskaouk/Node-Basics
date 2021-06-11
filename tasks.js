@@ -12,16 +12,13 @@
 function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
+  load();
   process.stdin.on('data', onDataReceived);
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
 }
 
-var tasks = [{ check:false , checkbox:"[ ]" , task: "buy batata"},
-             { check:true , checkbox:"[x]" , task: "feed the cat"},
-             { check:false , checkbox:"[ ]" , task: "do the exercises"},
-             { check:true , checkbox:"[x]" , task: "make the bed"},
-             { check:false , checkbox:"[ ]" , task: "finish the code"}];
+var tasks = [];
 
 
 /**
@@ -216,6 +213,13 @@ function onDataReceived(text) {
   else if(text === 'save\n'){
     save();
   }
+
+
+
+
+  else if(text=== 'load\n'){
+    load();
+  }
   else{
     unknownCommand(text);
   }
@@ -252,15 +256,13 @@ function hello(){
   console.log('hello!')
 }
 
-function save(){
-  var x = JSON.stringify(tasks);
-  fs = require('fs');
-  fs.writeFileSync("database.json", x);
-}
+var x;
 
 function load(){
-  fs = require('fs');
-  fs.readFile(__dirname + "/test.txt");
+  const fs = require('fs');
+
+  let rawdata = fs.readFileSync('database.json');
+  tasks = JSON.parse(rawdata);
 }
 
 /**
@@ -269,6 +271,9 @@ function load(){
  * @returns {void}
  */
 function quit(){
+  var x = JSON.stringify(tasks);
+  fs = require('fs');
+  fs.writeFileSync("database.json", x);
   console.log('Quitting now, goodbye!')
   process.exit();
 }
