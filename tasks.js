@@ -1,9 +1,10 @@
 
 
-var fileName = "database.json";
+var fileName;
 
 var doesExist = process.argv[2];
 if (doesExist == null){
+  var fileName = "database.json";
   console.log("no new file");
 }
 else if(doesExist != null){
